@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  metabase:
+    image: metabase/metabase
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: ${MB_DB_TYPE}
+      MB_DB_DBNAME: ${MB_DB_DBNAME}
+      MB_DB_PORT: ${MB_DB_PORT}
+      MB_DB_USER: ${MB_DB_USER}
+      MB_DB_PASS: ${MB_DB_PASS}
+      MB_DB_HOST: ${MB_DB_HOST}
+    restart: always
+    user: "1000:1000"  # Run as ec2-user
+    volumes:
+      - metabase-data:/metabase-data
+
+volumes:
+  metabase-data:
+    driver: local
